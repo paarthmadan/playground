@@ -25,7 +25,6 @@ public class J4 {
 				if(counter % removalFactor == 0){
 					guests[j] = -1;
 				}
-				
 			}
 		}
 		
