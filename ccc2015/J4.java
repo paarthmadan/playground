@@ -30,10 +30,21 @@ public class J4 {
 		}
 		
 		friendNumbers.sort(null);
-		
-		for(int i : friendNumbers){
-			System.out.println(i);
-		}
 	
+		for(int friend : friendNumbers){
+			
+			int startingPosition = -1;
+			
+			for(int i = 0; i < entryFriend.length; i++){
+				if(entryFriend[i] == friend){
+					startingPosition = i;
+					i = entryFriend.length;
+				}
+			}
+			
+			System.out.println("Friend: " + friend + " Original Position: " + startingPosition);
+			
+		}
+		
 	}
 }
