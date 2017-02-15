@@ -13,3 +13,17 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 ### Algorithms Implemented
 - Bubble Sort
 - Quick Sort
+
+### Future Implementations
+- Merge Sort
+- Insertion Sort
+- Binary Sort
+- Heap Sort
+- Dijkstra's
+- Manacher's
+- Dynamic Programming
+- Heaps
+
+
+
+ 
