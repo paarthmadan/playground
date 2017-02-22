@@ -14,11 +14,14 @@ public class J3 {
 		int verticalComponent = Math.abs(endY - startY);
 		int horizontalComponent = Math.abs(endX - startX);
 		
-		battery -= (verticalComponent + horizontalComponent);
+		int totalDistance = (verticalComponent + horizontalComponent);
 		
-		if(battery == 0)
-			System.out.println("Y");
-		else
+		if(totalDistance % 2 == 0 && battery % 2 == 1){
 			System.out.println("N");
+		}else{
+			System.out.println("Y");
+		}
+		
+		
 	}
 }
