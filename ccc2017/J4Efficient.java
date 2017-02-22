@@ -16,6 +16,10 @@ public class J4Efficient {
 		
 		int [] count = {1, 5, 5, 4, 4, 3, 3, 2, 2, 1, 0, 1};
 		
+		int totalCount = 1 + 5 + 5 + 4 + 4 + 3 + 3 + 2 + 2 + 1 + 0 + 1;
+		
+		int dayCycle = d / 720;
+		
 		int addHours = d / 60;
 		int addMinutes = d % 60;
 		
@@ -38,7 +42,7 @@ public class J4Efficient {
 			}
 		}
 		
-		System.out.println(finalCount);
+		System.out.println(finalCount + (totalCount * dayCycle));
 		
 	}
 }
