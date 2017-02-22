@@ -12,7 +12,7 @@ public class J4 {
 		
 		int d = input.nextInt();
 		
-		for(int j = 0; j < d; j++){
+		for(int i = 0; i < d; i++){
 			minute++;
 			
 			if(minute >= 60){
@@ -29,35 +29,42 @@ public class J4 {
 			
 			String time = hour + ":" + minuteZero + minute;
 			
-			time = time.replaceAll(":", "");
-			
-			int[] digits = new int[time.length()];
-			
-			for(int i = 0; i < time.length(); i++){
-				digits[i] = Integer.parseInt(String.valueOf(time.charAt(i)));
-			}
-			
-			int firstDifference = digits[1] - digits[0];
-			
-			boolean isDifferent = false;
-			
-			for(int i = 1; i < digits.length - 1; i++){
-				int newDifference = digits[i + 1] - digits[i];
-				
-				if(newDifference != firstDifference){
-					isDifferent = true;
-					i = digits.length - 1;
-				}
-				
-				firstDifference = newDifference;
-				
-			}
-			
-			if(!isDifferent)
+			if(isSequence(time)){
 				count++;
+			}
 			
 		}	
 		System.out.println(count);
+	}
+	
+	public static boolean isSequence(String time){
+		
+		
+		time = time.replaceAll(":", "");
+		
+		int[] digits = new int[time.length()];
+		
+		for(int i = 0; i < time.length(); i++){
+			digits[i] = Integer.parseInt(String.valueOf(time.charAt(i)));
+		}
+		
+		int firstDifference = digits[1] - digits[0];
+		
+		boolean isDifferent = false;
+		
+		for(int i = 1; i < digits.length - 1; i++){
+			int newDifference = digits[i + 1] - digits[i];
+			
+			if(newDifference != firstDifference){
+				isDifferent = true;
+				i = digits.length - 1;
+			}
+			
+			firstDifference = newDifference;
+			
+		}
+		
+		return !isDifferent;
 	}
 	
 }
