@@ -24,4 +24,9 @@ public class Edge {
 		return weight;
 	}
 	
+	@Override
+	public String toString(){
+		return startNode.getName() + " to " + endNode.getName() + " by weight " + this.getWeight();
+	}
+	
 }
