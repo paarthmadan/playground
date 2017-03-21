@@ -15,6 +15,8 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 ### Algorithms Implemented
 - Bubble Sort
 - Quick Sort
+- Linear Search
+- Binary Search (wip)
 - Dijkstra's (wip)
 
 ### Future Implementations
@@ -25,8 +27,7 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 - Manacher's
 - Dynamic Programming
 - Heaps
-- Linear Search
-- Binary Search
+
 - Interpolation Search
 
 
