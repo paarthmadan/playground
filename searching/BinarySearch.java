@@ -7,25 +7,29 @@ public class BinarySearch {
 	public BinarySearch(int [] data){
 		this.data = data;
 	}
-	
-	public int search(int low, int high, int searchKey){
-		
-		int testValue = data[low + (high - low)/2];
-		int index = low + (high - low)/2;
-		
-		int returnValue = -1;
-		
-		if(searchKey == testValue){
-			returnValue = index;
-		}else if(searchKey < testValue){
-			search(index, data.length, searchKey);
-		}else if(searchKey > testValue){
-			search(0, index, searchKey);
-		}else{
-			returnValue = -1;
-			return returnValue;
-		}
 
-		return returnValue;
-	}
+	public int search(int key){
+		int low = 0;
+		int high = data.length - 1;
+        
+		int returnIndex = -1;
+		
+		while(high >= low){
+             int middle = (low + high) / 2;
+             
+             if(data[middle] == key) {
+                 returnIndex = middle;
+            	 break;
+             }
+             
+             if(data[middle] < key) {
+                 low = middle + 1;
+             }
+             
+             if(data[middle] > key) {
+                 high = middle - 1;
+             }
+         }
+		return returnIndex;
+	  }
 }

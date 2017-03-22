@@ -25,7 +25,7 @@ public class SearchClient {
 		System.out.println(ls.search(KEY));
 		
 		BinarySearch bs = new BinarySearch(data);
-		System.out.println(bs.search(0, data.length, KEY));
+		System.out.println(bs.search(KEY));
 		
 	}
 }
