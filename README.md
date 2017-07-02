@@ -5,6 +5,7 @@
 
 | Contest  | Difficulty (Applies to CCC) | Completed | Total Score |
 | -------- | --------------------------- | --------- | ----------- |
+CCC 2007 | *Junior* | J1, J2, J3, J4 | **60/75**
 CCC 2013 | *Junior* | J1, J2, J3, J4, J5 (work in progress) | **60/75**
 CCC 2014 | *Junior* | J1, J2, J3, J4, J5 | **75/75**
 CCC 2015 | *Junior* | J1, J2, J3, J4 (work in progress) | **45/75**
