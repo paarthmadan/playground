@@ -1,7 +1,6 @@
 package ccc2017;
 import java.util.Scanner;
 
-
 public class J3 {
 	public static void main(String [] args){
 		Scanner input = new Scanner(System.in);
@@ -14,14 +13,11 @@ public class J3 {
 		int verticalComponent = Math.abs(endY - startY);
 		int horizontalComponent = Math.abs(endX - startX);
 		
-		int totalDistance = (verticalComponent + horizontalComponent);
+		int distance = verticalComponent + horizontalComponent;
 		
-		if(totalDistance % 2 == 0 && battery % 2 == 1){
-			System.out.println("N");
-		}else{
+		if(distance <= battery && (battery - distance) % 2 == 0)
 			System.out.println("Y");
-		}
-		
-		
+		else
+			System.out.println("N");
 	}
 }
