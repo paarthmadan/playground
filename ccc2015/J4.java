@@ -7,43 +7,37 @@ public class J4 {
 	public static void main(String [] args){
 		Scanner input = new Scanner(System.in);
 		
-		int numberOfEntries = input.nextInt();
-		//BUFFER for RETURN KEY
+		int m = input.nextInt();
 		input.nextLine();
 		
-		//PARALLEL ARRAYS
-		char [] entryType = new char[numberOfEntries];
-		int [] entryFriend = new int[numberOfEntries];
+		int [] record = new int[100];
 		
-		for(int i = 0; i < numberOfEntries; i++){
-			String entry = input.nextLine();
-			entryType[i] = entry.charAt(0);
-			entryFriend[i] = Integer.parseInt(entry.split(" ")[1]);
-		}
+		int timeCount = 0;
 		
-		ArrayList<Integer> friendNumbers = new ArrayList<Integer>();
-		
-		for(int i : entryFriend){
-			if(!friendNumbers.contains(i)){
-				friendNumbers.add(i);
+		for(int i = 0; i < m; i++){
+			String entryLine = input.nextLine();
+			char entry = entryLine.split(" ")[0].charAt(0);
+			int number = Integer.parseInt(entryLine.split(" ")[1]);
+			
+			if(entry == 'W'){
+				timeCount += number - 1;
 			}
-		}
-		
-		friendNumbers.sort(null);
-	
-		for(int friend : friendNumbers){
-			
-			int startingPosition = -1;
-			
-			for(int i = 0; i < entryFriend.length; i++){
-				if(entryFriend[i] == friend){
-					startingPosition = i;
-					i = entryFriend.length;
+			else{
+				timeCount++;
+				
+				if(entry == 'R'){
+					record[number - 1] -= timeCount;
+				}else{
+					record[number - 1] += timeCount;
 				}
 			}
-			
-			System.out.println("Friend: " + friend + " Original Position: " + startingPosition);
-			
+		}
+		
+		for(int i = 0; i < record.length; i++){
+			if(record[i] > 0)
+				System.out.println(i + 1 + " " + record[i]);
+			else if(record[i] < 0)
+				System.out.println(i + 1 + " " + "-1");
 		}
 		
 	}
