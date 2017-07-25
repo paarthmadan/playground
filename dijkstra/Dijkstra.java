@@ -19,19 +19,12 @@ public class Dijkstra {
 	private Map<Vertex, Integer> distance;
 	
 	//ALGORITHM
-	public Dijkstra(Graph graph){
+	public Dijkstra(Graph graph, Vertex startingNode){
 		
 		this.nodes = graph.getNodes();
 		this.edges = graph.getEdges();
 		
-		this.startingNode = nodes.get(0);
-		
-		//PRINTS ALL NODES
-		for(Vertex v: nodes)
-			System.out.println(v.getName());
-		
-		for(Edge e : edges)
-			System.out.println(e);
+		this.startingNode = startingNode;
 		
 		settledNodes = new HashSet<Vertex>();
 		unsettledNodes = new HashSet<Vertex>();
@@ -48,13 +41,8 @@ public class Dijkstra {
 			settledNodes.add(settledNode);
 			unsettledNodes.remove(settledNode);
 			findUnsettledNodes(settledNode);
-			System.out.println("Just settled: " + settledNode.getName());
 		}
-		
-		
 	}
-	
-	
 	
 	private void findUnsettledNodes(Vertex node) {
 		List<Vertex> adjacentNodes = getNeighbouringNodes(node);

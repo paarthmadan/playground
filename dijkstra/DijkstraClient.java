@@ -9,6 +9,8 @@ public class DijkstraClient {
 	static List<Vertex> nodes = new ArrayList<Vertex>();
 	static List<Edge> edges = new ArrayList<Edge>();
 	
+	private final static String STARTING_NODE = "A";
+	private final static String ENDING_NODE = "G";
 	
 	public static void main(String [] args){		
 		for(int i = 0; i < 7; i++){
@@ -25,13 +27,14 @@ public class DijkstraClient {
 		edges.add(createEdge("E", 1, "G"));
 		edges.add(createEdge("F", 3, "G"));
 	
-		Dijkstra d = new Dijkstra(new Graph(nodes, edges));
-		LinkedList<Vertex> path = d.getPath(nodes.get(nodes.size() - 1));
+		Dijkstra d = new Dijkstra(new Graph(nodes, edges), getVertexWithName(STARTING_NODE));
+		LinkedList<Vertex> path = d.getPath(getVertexWithName(ENDING_NODE));
+		
 		for(Vertex v : path){
-			if(v.equals(nodes.get(nodes.size() - 1)))
-				System.out.print(v.getName());
+			if(v.equals(getVertexWithName(ENDING_NODE)))
+				System.out.print(v);
 			else
-				System.out.print(v.getName() + " --> ");
+				System.out.print(v + " --> ");
 		}
 	}
 	
