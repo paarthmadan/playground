@@ -18,7 +18,7 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 - Quick Sort
 - Linear Search
 - Binary Search (wip)
-- Dijkstra's (wip)
+- Dijkstra's
 
 ### Future Implementations
 - Merge Sort
