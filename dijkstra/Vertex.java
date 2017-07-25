@@ -12,4 +12,12 @@ public class Vertex {
 		return name;
 	}
 	
+	public boolean equals(Vertex that){
+		if(this.name.equals(that.getName())){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }

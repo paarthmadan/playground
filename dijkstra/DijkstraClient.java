@@ -1,6 +1,7 @@
 package dijkstra;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DijkstraClient {
@@ -15,16 +16,23 @@ public class DijkstraClient {
 			nodes.add(currentVertex);			
 		}
 		
-		edges.add(new Edge(getVertexWithName("A"), 2, getVertexWithName("B")));
-		edges.add(new Edge(getVertexWithName("A"), 1, getVertexWithName("C")));
-		edges.add(new Edge(getVertexWithName("B"), 4, getVertexWithName("C")));
-		edges.add(new Edge(getVertexWithName("B"), 5, getVertexWithName("G")));
-		edges.add(new Edge(getVertexWithName("C"), 1, getVertexWithName("D")));
-		edges.add(new Edge(getVertexWithName("C"), 2, getVertexWithName("E")));
-		edges.add(new Edge(getVertexWithName("E"), 3, getVertexWithName("G")));
+		edges.add(createEdge("A", 1, "B"));
+		edges.add(createEdge("A", 6, "C"));
+		edges.add(createEdge("B", 2, "C"));
+		edges.add(createEdge("B", 4, "E"));
+		edges.add(createEdge("C", 2, "D"));
+		edges.add(createEdge("D", 3, "F"));
+		edges.add(createEdge("E", 1, "G"));
+		edges.add(createEdge("F", 3, "G"));
 	
-		Dijkstra d = new Dijkstra(nodes, edges);
-		
+		Dijkstra d = new Dijkstra(new Graph(nodes, edges));
+		LinkedList<Vertex> path = d.getPath(nodes.get(nodes.size() - 1));
+		for(Vertex v : path){
+			if(v.equals(nodes.get(nodes.size() - 1)))
+				System.out.print(v.getName());
+			else
+				System.out.print(v.getName() + " --> ");
+		}
 	}
 	
 	
@@ -41,5 +49,8 @@ public class DijkstraClient {
 		return null;
 	}
 	
+	public static Edge createEdge(String vertexStart, int weight, String vertexEnd){
+		return new Edge(getVertexWithName(vertexStart), weight, getVertexWithName(vertexEnd));
+	}
 	
 }

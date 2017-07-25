@@ -17,7 +17,7 @@ public class Edge {
 	}
 	
 	public Vertex getEndNode(){
-		return startNode;
+		return endNode;
 	}
 	
 	public int getWeight(){
