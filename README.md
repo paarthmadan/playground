@@ -28,7 +28,6 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 - Manacher's
 - Dynamic Programming
 - Heaps
-
 - Interpolation Search
 
 
