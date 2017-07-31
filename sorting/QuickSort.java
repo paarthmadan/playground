@@ -72,11 +72,14 @@ public class QuickSort {
 
 	public static void main(String [] args){
 		//Test Array
-		int [] numbers = {3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11};
+		int [] numbers = {3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11,3,1,5,8,2,3,4,5,6,1,10,100,51,540,539,2,11};
 		//Initializing QuickSort object
 		QuickSort qs = new QuickSort();
 		//assigning value of numbers to the returned array
+		
+		long pastTime = System.currentTimeMillis();
 		numbers = qs.quicksort(numbers);
+		System.out.println(System.currentTimeMillis() - pastTime);
 		
 		//quick print
 		for(int i = 0; i < numbers.length; i++){
