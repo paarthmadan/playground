@@ -1,4 +1,4 @@
-# My Java Playground
+# Playground
 ### An experimental repository dedicated to learning new implementations of algorithms and preparing for computing competitions.
 
 ### Contest Programming
@@ -30,6 +30,9 @@ CCC 2014 | *Senior* | S1, S2, S3 | **35/75**
 - Heaps
 - Interpolation Search
 
+### Languages Used
+- Java 8
+- Python 2/3
 
 
  
