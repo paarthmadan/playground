@@ -48,12 +48,13 @@ for i in range(len(combinations_left)):
         current_calc_score[x] += scores[x]
     calc_scores[i] = current_calc_score
 
-max_value = -1
-max_index = -1
-
-is_tie = False
 
 for final_comb in calc_scores:
+
+    max_value = -1
+    max_index = -1
+    is_tie = False
+
     for i in range(len(final_comb)):
         if final_comb[i] > max_value:
             max_value = final_comb[i]
@@ -61,9 +62,8 @@ for final_comb in calc_scores:
             is_tie = False
         elif final_comb[i] == max_value:
             is_tie = True
-    if is_tie == False and max_index == fav_team - 1:
+    if is_tie is False and max_index == fav_team - 1:
         total_count += 1
-
 
 print total_count
 
