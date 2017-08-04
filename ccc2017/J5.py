@@ -1,17 +1,29 @@
-from itertools import product
-
 n = int(input())
 wood = [int(i) for i in raw_input().split()]
 
 combinations = []
 total = []
-total_count = [0] * 4000
+total_count = [0] * 4001
 
-for i in range(len(wood)):
+iterator = range(len(wood)).__iter__()
+
+for i in iterator:
+    temp_combinations = []
     for j in range(i + 1, len(wood)):
-        combinations.append([wood[i], wood[j]])
-        total.append(wood[i] + wood[j])
-        total_count[wood[i] + wood[j] - 1] += 1
+        if (len(temp_combinations) + 2) % 4 != 0 and [wood[i], wood[j]] not in temp_combinations:
+                combinations.append([wood[i], wood[j]])
+                if len(temp_combinations) > 0:
+                    if temp_combinations[len(temp_combinations) - 1] == [wood[i], wood[j]]:
+                        temp_combinations.append([wood[i], wood[j]])
+                else:
+                    temp_combinations.append([wood[i], wood[j]])
+                total.append(wood[i] + wood[j])
+                total_count[wood[i] + wood[j] - 1] += 1
+        else:
+            for q in range(1):
+                iterator.next()
+            break
+
 
 max_value = 0
 max_index = -1
@@ -30,5 +42,4 @@ for i in range(len(total_count)):
         max_indexes.append(i)
 
 print str(max_value) + " " + str(len(max_indexes))
-
 
