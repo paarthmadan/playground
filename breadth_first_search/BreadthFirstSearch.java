@@ -19,25 +19,24 @@ public class BreadthFirstSearch {
 			
 			for(int i = 0; i < n; i++)
 				nodes[i] = new Node(i + 1);
-			int count = 0;
+
 			for(int edge = 0; edge < m; edge++){
 				int src = input.nextInt();
 				int dest = input.nextInt();
-				if(src == 16){
-					
-					count++;
+				if(!nodes[src - 1].getAdjacentNodes().contains(nodes[dest - 1])){
+					nodes[src - 1].addAdjacentNode(nodes[dest - 1]);
+					nodes[dest - 1].addAdjacentNode(nodes[src - 1]);
 				}
-				nodes[src - 1].addAdjacentNode(nodes[dest - 1]);
 			}
-			System.out.println(count);
+			
 			int startingNode = input.nextInt();
 	
 			int [] distances = search(nodes, startingNode);
 			
-//			for(int d : distances)
-//				if(d != 0)
-//					System.out.print(d + " ");
-//			System.out.println();
+			for(int d : distances)
+				if(d != 0)
+					System.out.print(d + " ");
+			System.out.println();
 		}
 	}
 	public static int[] search(Node[] nodes, int startingNode){
@@ -54,6 +53,7 @@ public class BreadthFirstSearch {
 		while(!queue.isEmpty()){
 			Node currentNode = queue.poll();
 			ArrayList<Node> neighbours = currentNode.getAdjacentNodes();
+			
 			for(Node n : neighbours){
 				if(distances[n.getLabel() - 1] == -1){
 					distances[n.getLabel() - 1] = distances[currentNode.getLabel() - 1] + EDGE_WEIGHT;
