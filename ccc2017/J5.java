@@ -25,7 +25,8 @@ public class J5 {
 		for(int i = 0; i < (woodPieces.length / 2); i++){
 //			System.out.println(woodPieces[i] + woodPieces[woodPieces.length - 1 - i] + ": " + woodPieces[i] + " + " + woodPieces[woodPieces.length - 1 - i]);
 			lengths[woodPieces[i] + woodPieces[woodPieces.length - 1 - i]]++;
-			index.add(woodPieces[i] + woodPieces[woodPieces.length - 1 - i]);
+			if(!index.contains(woodPieces[i] + woodPieces[woodPieces.length - 1 - i]))
+				index.add(woodPieces[i] + woodPieces[woodPieces.length - 1 - i]);
 		}
 		
 		int max = -1;
@@ -33,12 +34,14 @@ public class J5 {
 		int maxCount = 1;
 		
 		for(int i = 0; i < index.size(); i++){
+//			System.out.println("check: " + lengths[index.get(i)] + " max: " + maxCount);
 			if(lengths[index.get(i)] > max){
 				max = lengths[index.get(i)];
 				maxIndex = i;
-				maxCount = 0;
+				maxCount = 1;
 			}else if(max == lengths[index.get(i)]){
 				maxCount++;
+//				System.out.println("here");
 			}
 		}
 		
