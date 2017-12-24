@@ -22,12 +22,18 @@ public class J5 {
 		int [] lengths = new int[4001];
 		ArrayList<Integer> index = new ArrayList<Integer>();
 		
-		for(int i = 0; i < (woodPieces.length / 2); i++){
-//			System.out.println(woodPieces[i] + woodPieces[woodPieces.length - 1 - i] + ": " + woodPieces[i] + " + " + woodPieces[woodPieces.length - 1 - i]);
-			lengths[woodPieces[i] + woodPieces[woodPieces.length - 1 - i]]++;
-			if(!index.contains(woodPieces[i] + woodPieces[woodPieces.length - 1 - i]))
-				index.add(woodPieces[i] + woodPieces[woodPieces.length - 1 - i]);
+		for(int i = 0; i <= (int)(Math.ceil((woodPieces.length / 2.0))); i++){
+			for(int j = 0; j < woodPieces.length - i - 1; j++){
+//				System.out.println(i + " " + j);
+//				System.out.println(woodPieces[i] + woodPieces[woodPieces.length - 1 - i] + ": " + woodPieces[i] + " + " + woodPieces[woodPieces.length - 1 - i]);
+				lengths[woodPieces[i] + woodPieces[woodPieces.length - 1 - j]]++;
+				if(!index.contains(woodPieces[i] + woodPieces[woodPieces.length - 1 - j]))
+					index.add(woodPieces[i] + woodPieces[woodPieces.length - 1 - j]);
+			}
 		}
+		
+//		for(int i : index)
+//			System.out.println(i);
 		
 		int max = -1;
 		int maxIndex = -1;
@@ -45,10 +51,10 @@ public class J5 {
 			}
 		}
 		
-		if(max != 1)
+//		if(max != 1)
 			System.out.println(max + " " + maxCount);
-		else
-			System.out.println(max + " " + numberOfCombinations);
+//		else
+//			System.out.println(max + " " + numberOfCombinations);
 		
 	}
 }
