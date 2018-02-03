@@ -5,56 +5,45 @@ import java.util.Stack;
 public class S3 {
 	public static void main(String [] args){
 		Scanner input = new Scanner(System.in);
-		
-		int numberOfTestCases = input.nextInt();
-		int counter = 0;
-		
-		while(counter < numberOfTestCases){
-		
-			counter++;
+		int numberOfTests = input.nextInt();
+		int currentTest = 1;
+		while(currentTest <= numberOfTests){
+			int numberOfCars = input.nextInt();
 			
-			Stack<Integer> cart = new Stack<Integer>();
-			Stack<Integer> loadingArea = new Stack<Integer>();
+			Stack<Integer> carts = new Stack<Integer>();
+			Stack<Integer> branch = new Stack<Integer>();
 			
-			int n = input.nextInt();
-			
-			int desiredPosition = 1;
-			
-			for(int i = 0; i < n; i++){
-				cart.push(input.nextInt());
+			for(int i = 0; i < numberOfCars; i++){
+				carts.push(input.nextInt());
 			}
 			
-			for(int i = 0; i < n; i++){
-				int currentValue = cart.peek();
-				if(currentValue == desiredPosition){
-					cart.pop();
-					desiredPosition++;
+			boolean isDone = false;
+			boolean isPossible = false;
+			int currentDesiredPosition = 1;
+			
+			while(!isDone){
+				if(!carts.isEmpty() && carts.peek() == currentDesiredPosition){
+					carts.pop();
+					currentDesiredPosition++;
+				}else if(!branch.isEmpty() && branch.peek() == currentDesiredPosition){
+					branch.pop();
+					currentDesiredPosition++;
+				}else if(carts.isEmpty() && branch.isEmpty()){
+					isPossible = true;
+					isDone = true;
+				}else if(carts.isEmpty() && !branch.isEmpty() && branch.peek() != currentDesiredPosition){
+					isDone = true;
+				}else{
+					branch.push(carts.pop());
 				}
-				
-				if(currentValue > desiredPosition){
-					int currentLoadingValue = -1;
-					if(!loadingArea.isEmpty())
-						currentLoadingValue = loadingArea.peek();
-					if(currentValue < currentLoadingValue || currentLoadingValue == -1){
-						loadingArea.push(currentValue);
-						cart.pop();
-					}
-					
-					if(currentValue > currentLoadingValue){
-						if(currentLoadingValue == desiredPosition){
-							loadingArea.pop();
-							loadingArea.push(cart.pop());
-						}
-					}
-					
-				}	
 			}
 			
-			if(cart.size() > 0){
-				System.out.println("N");
-			}else{
+			if(isPossible)
 				System.out.println("Y");
-			}
+			else
+				System.out.println("N");
+			
+			currentTest++;
 		}
 	}
 }
