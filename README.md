@@ -16,7 +16,7 @@ CCC 2016 | *Junior* | J1, J2, J3, J4, J5 | **75/75**
 CCC 2017 | *Junior* | J1, J2, J3, J4 | **60/75**
 CCC 2013 | *Senior* | S1, S2, S3 | **45/75**
 CCC 2014 | *Senior* | S1, S2, S3 | **45/75**
-CCC 2015 | *Senior* | S1, S2 | **30/75**
+CCC 2015 | *Senior* | S1, S2, S3 | **45/75**
 
 
 ### Algorithms Implemented
