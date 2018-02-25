@@ -20,6 +20,7 @@ CCC 2013 | *Senior* | S1, S2, S3 | **45/75**
 CCC 2014 | *Senior* | S1, S2, S3 | **45/75**
 CCC 2015 | *Senior* | S1, S2, S3 | **45/75**
 CCC 2016 | *Senior* | S1, S2 | **30/75**
+CCC 2018 | *Senior* | S1, S2, S3 (6/9 subs) | **30/75**
 
 
 ### Algorithms Implemented
