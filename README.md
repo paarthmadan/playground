@@ -30,9 +30,9 @@ CCC 2018 | *Senior* | S1, S2, S3 (6/9 subs) | **30/75**
 - Binary Search (wip)
 - Dijkstra's
 - Breadth First Search
+- Merge Sort
 
 ### Future Implementations
-- Merge Sort
 - Insertion Sort
 - Binary Sort
 - Heap Sort
