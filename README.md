@@ -44,10 +44,10 @@ CCC 2018 | *Senior* | S1, S2, S3 (6/9 subs) | **30/75**
 ### Languages Used
 - Java 8
 - Python 2/3
+- Rust
 
 ### Future Languages
 - C++ / C
-- Rust
 - Go
 - Ruby
 
