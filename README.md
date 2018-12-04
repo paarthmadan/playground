@@ -45,11 +45,11 @@ CCC 2018 | *Senior* | S1, S2, S3 (6/9 subs) | **30/75**
 - Java 8
 - Python 2/3
 - Rust
+- Ruby
 
 ### Future Languages
 - C++ / C
 - Go
-- Ruby
 
 
  
