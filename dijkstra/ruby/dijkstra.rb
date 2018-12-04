@@ -20,13 +20,28 @@ class Dijkstra
           unvisited[outgoing_edge.to] = unvisited[current_node] + outgoing_edge.cost
         end
       end
+
       unvisited.delete(current_node)
-      unvisited.sort_by { |k,v| v }
-      current_node = unvisited.keys[0]
+      break if unvisited.length == 0
+
+      current_node = unvisited.min_by { |k,v| v }[0]
     end
 
-    predecessors.each { |to, from| puts "#{to} --> #{from}" }
+    path = extract_path(predecessors)
+  end
 
+  private
+  def extract_path(predecessors)
+    current_node = @destination
+
+    path = [current_node]
+
+    until current_node == @origin
+      path << predecessors[current_node]
+      current_node = predecessors[current_node]
+    end
+
+    path.reverse
   end
 
 end
