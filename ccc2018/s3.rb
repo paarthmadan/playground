@@ -20,6 +20,14 @@ class Node
   end
 end
 
+class Edge
+  def initialize(from, to, cost)
+    @from = from
+    @to = to
+    @cost = cost
+  end
+end
+
 class Map
   attr_reader :length, :width
   attr_accessor :layout
@@ -29,6 +37,26 @@ class Map
     @width = width
     @layout = {}
   end
+
+  # Recursive Traversal Evaluation (used to determine where conveyors end)
+  def determine_end(x, y)
+    symbol = @layout[[x,y]].type
+    case symbol
+    when "."
+      return [x,y]
+    when "D"
+      determine_end(x, y + 1)
+    when "U"
+      determine_end(x, y - 1)
+    when "L"
+      determine_end(x - 1, y)
+    when "R"
+      determine_end(x + 1, y)
+    else
+      return -1
+    end
+  end
+
 end
 
 # Create map with user input
@@ -40,4 +68,9 @@ map.length.times do |y|
   nodes.each_with_index { |n, x| map.layout[[x,y]] = n }
 end
 
-puts map.layout
+1.upto(map.length - 2) do |y|
+  1.upto(map.width - 2) do |x|
+    print map.determine_end(x, y)
+  end
+  puts
+end
