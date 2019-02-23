@@ -21,15 +21,23 @@ class Node
 end
 
 class Map
+  attr_reader :length, :width
+  attr_accessor :layout
 
-  attr_reader :width, :height
-
-  def initialize(width, height)
+  def initialize(length, width)
+    @length = length
     @width = width
-    @height = height
+    @layout = {}
   end
-
 end
 
 # Create map with user input
-map = Map.new(*gets.split(" ").map(&:to_i))
+map = Map.new(*gets.split(' ').map(&:to_i))
+
+# Populate map layout with user data
+map.length.times do |y|
+  nodes = gets.split('').map { |symbol| Node.new(symbol) }
+  nodes.each_with_index { |n, x| map.layout[[x,y]] = n }
+end
+
+puts map.layout
