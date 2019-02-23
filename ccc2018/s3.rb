@@ -17,14 +17,20 @@ class Node
 
   def initialize(type)
     @type = type
+    @edges = []
   end
 
   def to_s
     @type
   end
+
+  def add_edge(edge)
+    @edges << edge if edge.from == self
+  end
 end
 
 class Edge
+  attr_reader :from, :to, :cost
   def initialize(from, to, cost)
     @from = from
     @to = to
@@ -84,14 +90,21 @@ map.length.times do |y|
   nodes.each_with_index { |n, x| map.layout[[x,y]] = n }
 end
 
+# Create edges
 1.upto(map.length - 2) do |y|
   1.upto(map.width - 2) do |x|
-    if map.layout[[x,y]].type == '.'
+    move_start = [x,y]
+    start_node = map.layout[move_start]
+    if start_node.type == '.' || start_node.type == 'S'
       MOVES.each do |move|
         move_pos = [x + move[0], y + move[1]]
         move_end = map.determine_end(*move_pos)
-        edge = Edge.new(map.layout[[x,y]], map.layout[move_pos], 1) unless move_end == -1
-        map.edges << edge
+        unless move_end == -1 || move_end == move_start
+          edge = Edge.new(start_node, map.layout[move_end], 1)
+          map.edges << edge
+          start_node.add_edge(edge)
+          puts "#{[x,y]}, #{move_end}"
+        end
       end
     end
   end
