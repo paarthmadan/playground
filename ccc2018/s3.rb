@@ -18,6 +18,10 @@ class Node
   def initialize(type)
     @type = type
   end
+
+  def to_s
+    @type
+  end
 end
 
 class Edge
@@ -26,31 +30,36 @@ class Edge
     @to = to
     @cost = cost
   end
+
+  def to_s
+    "#{@from} ⟶  #{@to}"
+  end
 end
 
 class Map
   attr_reader :length, :width
-  attr_accessor :layout
+  attr_accessor :layout, :edges
 
   def initialize(length, width)
     @length = length
     @width = width
     @layout = {}
+    @edges = []
   end
 
   # Recursive Traversal Evaluation (used to determine where conveyors end)
   def determine_end(x, y)
     symbol = @layout[[x,y]].type
     case symbol
-    when "."
+    when '.'
       return [x,y]
-    when "D"
+    when 'D'
       determine_end(x, y + 1)
-    when "U"
+    when 'U'
       determine_end(x, y - 1)
-    when "L"
+    when 'L'
       determine_end(x - 1, y)
-    when "R"
+    when 'R'
       determine_end(x + 1, y)
     else
       return -1
@@ -58,6 +67,13 @@ class Map
   end
 
 end
+
+MOVES = [
+  [0, 1],
+  [0, -1],
+  [1, 0],
+  [-1, 0],
+]
 
 # Create map with user input
 map = Map.new(*gets.split(' ').map(&:to_i))
@@ -70,7 +86,15 @@ end
 
 1.upto(map.length - 2) do |y|
   1.upto(map.width - 2) do |x|
-    print map.determine_end(x, y)
+    if map.layout[[x,y]].type == '.'
+      MOVES.each do |move|
+        move_pos = [x + move[0], y + move[1]]
+        move_end = map.determine_end(*move_pos)
+        edge = Edge.new(map.layout[[x,y]], map.layout[move_pos], 1) unless move_end == -1
+        map.edges << edge
+      end
+    end
   end
-  puts
 end
+
+puts map.edges
