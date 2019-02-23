@@ -12,3 +12,24 @@
 # A preliminary screening will be run, to determine which nodes are affected
 # from the camera, and effectively remove these edges.
 
+class Node
+  attr_reader :type
+
+  def initialize(type)
+    @type = type
+  end
+end
+
+class Map
+
+  attr_reader :width, :height
+
+  def initialize(width, height)
+    @width = width
+    @height = height
+  end
+
+end
+
+# Create map with user input
+map = Map.new(*gets.split(" ").map(&:to_i))
