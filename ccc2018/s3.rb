@@ -141,4 +141,17 @@ until unvisited.length == 0
   current_node = unvisited.min_by { |k,v| v }[0]
 end
 
+def trace(ending_node, starting_node, p)
+  if ending_node == starting_node
+    return 0
+  elsif p[ending_node] == nil
+    return -1
+  else
+    return 1 + trace(p[ending_node], starting_node, p)
+  end
+end 
+
+map.layout.each do |_, node|
+  puts trace(node, origin, predecessors) if node.type == "."
+end
 
