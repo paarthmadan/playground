@@ -11,6 +11,13 @@
 #
 # A preliminary screening will be run, to determine which nodes are affected
 # from the camera, and effectively remove these edges.
+#
+# New considerations:
+# Dijkstra's isn't the best implementation.
+# Because the cost of each edge is 1, a BFS is likely faster
+# Currently, the implementation gets the correct answer, but TLE's (5.6 > 1)
+# Also: Ruby's slow asf
+
 
 class Node
   attr_reader :type, :edges
@@ -162,7 +169,6 @@ map.layout.each do |_, node|
 end
 
 b4_time = Time.now
-
 
 puts b1_time - start_time
 puts b2_time - b1_time
