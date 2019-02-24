@@ -82,15 +82,17 @@ MOVES = [
   [-1, 0],
 ]
 
+start_time = Time.now
+
 # Create map with user input
 map = Map.new(*gets.split(' ').map(&:to_i))
 
 # Populate map layout with user data
 map.length.times do |y|
-  nodes = gets.chomp.split('').map { |symbol| Node.new(symbol) }
-  nodes.each_with_index { |n, x| map.layout[[x,y]] = n }
-  nodes.each_with_index { |n, x| n.label = "(#{x}, #{y})" }
+  gets.chomp.split('').each_with_index { |symbol, x| map.layout[[x,y]] = Node.new(symbol) }
 end
+
+b1_time = Time.now
 
 origin = nil
 
@@ -108,12 +110,14 @@ origin = nil
           edge = Edge.new(start_node, map.layout[move_end], 1)
           map.edges << edge
           start_node.add_edge(edge)
-          puts "#{[x,y]}, #{move_end}"
+          # puts "#{[x,y]}, #{move_end}"
         end
       end
     end
   end
 end
+
+b2_time = Time.now
 
 # Dijkstra's
 unvisited = {}
@@ -141,6 +145,8 @@ until unvisited.length == 0
   current_node = unvisited.min_by { |k,v| v }[0]
 end
 
+b3_time = Time.now
+
 def trace(ending_node, starting_node, p)
   if ending_node == starting_node
     return 0
@@ -155,3 +161,10 @@ map.layout.each do |_, node|
   puts trace(node, origin, predecessors) if node.type == "."
 end
 
+b4_time = Time.now
+
+
+puts b1_time - start_time
+puts b2_time - b1_time
+puts b3_time - b2_time
+puts b4_time - b3_time
