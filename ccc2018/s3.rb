@@ -13,7 +13,8 @@
 # from the camera, and effectively remove these edges.
 
 class Node
-  attr_reader :type
+  attr_reader :type, :edges
+  attr_accessor :label
 
   def initialize(type)
     @type = type
@@ -21,7 +22,7 @@ class Node
   end
 
   def to_s
-    @type
+    "#{@label}, #{@type}"
   end
 
   def add_edge(edge)
@@ -86,15 +87,19 @@ map = Map.new(*gets.split(' ').map(&:to_i))
 
 # Populate map layout with user data
 map.length.times do |y|
-  nodes = gets.split('').map { |symbol| Node.new(symbol) }
+  nodes = gets.chomp.split('').map { |symbol| Node.new(symbol) }
   nodes.each_with_index { |n, x| map.layout[[x,y]] = n }
+  nodes.each_with_index { |n, x| n.label = "(#{x}, #{y})" }
 end
+
+origin = nil
 
 # Create edges
 1.upto(map.length - 2) do |y|
   1.upto(map.width - 2) do |x|
     move_start = [x,y]
     start_node = map.layout[move_start]
+    origin = start_node if start_node.type == 'S'
     if start_node.type == '.' || start_node.type == 'S'
       MOVES.each do |move|
         move_pos = [x + move[0], y + move[1]]
@@ -110,4 +115,30 @@ end
   end
 end
 
-puts map.edges
+# Dijkstra's
+unvisited = {}
+predecessors = {}
+
+map.layout.each do |_, node|
+  unvisited[node] = (node == origin) ? 0 : Float::MAX.to_i if %w(. S).include?(node.type)
+end
+
+current_node = origin
+
+until unvisited.length == 0
+  current_node.edges.each do |outgoing_edge|
+    if unvisited[outgoing_edge.to]
+      if unvisited[current_node] + outgoing_edge.cost < unvisited[outgoing_edge.to]
+        predecessors[outgoing_edge.to] = current_node
+        unvisited[outgoing_edge.to] = unvisited[current_node] + outgoing_edge.cost
+      end
+    end
+  end
+
+  unvisited.delete(current_node)
+  break if unvisited.length == 0
+
+  current_node = unvisited.min_by { |k,v| v }[0]
+end
+
+
