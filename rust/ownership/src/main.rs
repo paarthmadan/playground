@@ -18,12 +18,12 @@ fn add_period(s: &mut String) {
     s.push_str("!");
 }
 
-fn first_word(s: &String) -> &str {
+fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
 
     for (i, &letter) in bytes.iter().enumerate(){
         if letter == b' ' {
-            return &s[0..i];
+            return &s[..i];
         }
     }
 
