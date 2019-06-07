@@ -1,3 +1,5 @@
+use std::panic;
+
 fn main() {
     assert!(reverse(321) == 123);
     assert!(reverse(-123) == -321);
@@ -10,6 +12,10 @@ fn main() {
     assert!(find_complement(5) == 2); 
     assert!(find_complement(1) == 0); 
     assert!(find_complement(2147483647) == 0); 
+
+    let grid = vec![vec![0,1,0,0], vec![1,1,1,0], vec![0,1,0,0], vec![1,1,0,0]];
+    assert!(island_perimeter(grid) == 16);
+    println!("{:?}", fizz_buzz(15));
 }
 
 fn reverse(mut x: i32) -> i32 {
@@ -54,3 +60,35 @@ fn find_complement(mut num: i32) -> i32 {
     sum
 }
 
+
+
+fn island_perimeter(grid: Vec<Vec<i32>>) -> i32 {
+    let mut perimeter = 0;
+    for j in 0..grid.len() {
+        for i in 0..grid[j].len() {
+            if grid[j][i] == 0 { continue; }
+            if i == 0 { perimeter += 1 }
+            else if grid[j][i - 1] == 0 { perimeter += 1 }
+
+            if i == grid[j].len() - 1 { perimeter += 1 }
+            else if grid[j][i + 1] == 0 { perimeter += 1 }
+
+            if j == 0 { perimeter += 1 }
+            else if grid[j - 1][i] == 0 { perimeter += 1 }
+
+            if j == grid.len() - 1 { perimeter += 1 }
+            else if grid[j + 1][i] == 0 { perimeter += 1 }
+        }
+    }
+    perimeter
+}
+fn fizz_buzz(n: i32) -> Vec<String> {
+    let mut output: Vec<String> = Vec::new();
+    for i in 1..=n {
+        if i % 15 == 0 { output.push(String::from("FizzBuzz")); }
+        else if i % 5 == 0 { output.push(String::from("Buzz")); }
+        else if i % 3 == 0 { output.push(String::from("Fizz")); }
+        else { output.push(i.to_string()); }
+    }
+    output
+}
