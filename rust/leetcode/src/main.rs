@@ -1,4 +1,5 @@
 use std::panic;
+use std::cmp;
 
 fn main() {
     assert!(reverse(321) == 123);
@@ -60,8 +61,6 @@ fn find_complement(mut num: i32) -> i32 {
     sum
 }
 
-
-
 fn island_perimeter(grid: Vec<Vec<i32>>) -> i32 {
     let mut perimeter = 0;
     for j in 0..grid.len() {
@@ -82,6 +81,7 @@ fn island_perimeter(grid: Vec<Vec<i32>>) -> i32 {
     }
     perimeter
 }
+
 fn fizz_buzz(n: i32) -> Vec<String> {
     let mut output: Vec<String> = Vec::new();
     for i in 1..=n {
@@ -91,4 +91,22 @@ fn fizz_buzz(n: i32) -> Vec<String> {
         else { output.push(i.to_string()); }
     }
     output
+}
+
+fn max_increase_keeping_skyline(grid: Vec<Vec<i32>>) -> i32 {
+    let mut x: Vec<i32> = vec![-1; grid.len()];
+    let mut y: Vec<i32> = vec![-1; grid.len()];
+    for (i, row) in grid.iter().enumerate() {
+        for (j, element) in row.iter().enumerate() {
+            if (element > &y[i]) { y[i] = *element; }
+            if (element > &x[j]) { x[j] = *element; }
+        }
+    }
+    let mut sum = 0;
+    for (i, row) in grid.iter().enumerate() {
+        for (j, element) in row.iter().enumerate() {
+            sum = sum + (cmp::min(x[j], y[i]) - *element);
+        }
+    }
+    return sum;
 }
