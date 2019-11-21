@@ -16,7 +16,10 @@ fn main() {
 
     let grid = vec![vec![0,1,0,0], vec![1,1,1,0], vec![0,1,0,0], vec![1,1,0,0]];
     assert!(island_perimeter(grid) == 16);
-    println!("{:?}", fizz_buzz(15));
+
+    assert!(valid_parens(String::from("{[]}")) == true);
+    assert!(valid_parens(String::from("([)]")) == false);
+    assert!(valid_parens(String::from("(")) == false);
 }
 
 fn reverse(mut x: i32) -> i32 {
@@ -109,4 +112,26 @@ fn max_increase_keeping_skyline(grid: Vec<Vec<i32>>) -> i32 {
         }
     }
     return sum;
+}
+
+fn valid_parens(s: String) -> bool {
+    let mut stack: Vec<char> = Vec::new();
+    for c in s.chars() {
+        if c == '(' || c == '{' || c == '[' {
+            stack.push(c);
+        } else {
+            let el = stack.pop();
+            let el = match el {
+                Some(c) => c,
+                None => return false,
+            };
+            match (el, c) {
+                ('[', ']') => continue,
+                ('{', '}') => continue,
+                ('(', ')') => continue,
+                _ => return false,
+            }
+        }
+    }
+    stack.len() == 0
 }
