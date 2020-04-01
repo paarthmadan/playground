@@ -15,6 +15,19 @@ struct Heap {
 }
 
 impl Heap {
+    fn build_from_list(list: Vec<u32>) -> Heap {
+        let n = list.len();
+
+        let list = list.into_iter().map(|el| Entry::new(el, el)).collect();
+        let mut heap = Heap { list };
+
+        for pos in (1..=(n / 2)).rev() {
+            heap.downheap(pos);
+        }
+
+        heap
+    }
+
     fn new() -> Self {
         Heap { list: Vec::new() }
     }
@@ -64,24 +77,31 @@ impl Heap {
         let left_child = pos * 2;
         let right_child = (pos * 2) + 1;
         let current_priority = self.get_priority(pos).unwrap();
-        let restored = match (
-            self.get_priority(left_child),
-            self.get_priority(right_child),
-        ) {
-            (Some(left), Some(right)) => current_priority >= left && current_priority >= right,
-            (Some(left), None) => current_priority >= left,
-            (None, None) => true,
-            _ => unreachable! {},
-        };
+
+        let mut restored = true;
+        let mut new_pos = left_child;
+
+        if let Some(left) = self.get_priority(left_child) {
+            restored = if let Some(right) = self.get_priority(right_child) {
+                if right > left {
+                    new_pos = right_child;
+                }
+                current_priority >= right && current_priority >= left
+            } else {
+                current_priority >= left
+            }
+        }
 
         if !restored {
-            self.swap(pos, left_child);
-            self.downheap(left_child);
+            self.swap(pos, new_pos);
+            self.downheap(new_pos);
         }
     }
 
     pub fn remove_max(&mut self) -> Option<Entry> {
-        if self.list.len() <= 1 { return self.list.pop(); }
+        if self.list.len() <= 1 {
+            return self.list.pop();
+        }
 
         self.swap(1, self.list.len());
         let max = self.list.pop();
@@ -111,6 +131,19 @@ impl PriorityQueue {
     pub fn remove_max(&mut self) -> Option<Entry> {
         self.heap.remove_max()
     }
+
+    pub fn sort(list: Vec<u32>) -> Vec<u32> {
+        let mut pq = PriorityQueue {
+            heap: Heap::build_from_list(list),
+        };
+
+        let mut sorted: Vec<u32> = Vec::new();
+        while let Some(x) = pq.remove_max() {
+            sorted.push(x.value);
+        }
+
+        sorted
+    }
 }
 
 fn main() {
@@ -129,4 +162,9 @@ fn main() {
             None => break,
         }
     }
+
+    for x in PriorityQueue::sort(vec![10, 12, 1, 5, 7, 9, 11, 15, 32, 1006]) {
+        print!("{} ", x);
+    }
+    println!();
 }
