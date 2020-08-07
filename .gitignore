@@ -65,3 +65,5 @@ Cargo.lock
 **/*.rs.bk
 
 **.swp
+
+**.in
