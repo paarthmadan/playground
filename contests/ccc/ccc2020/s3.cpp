@@ -12,6 +12,7 @@ using namespace std;
 
 struct RollingHash {
   int hash = 0;
+  int x = 0;
   int hist[ALPHA_LEN] = { 0 };
 
   RollingHash(string st) {
@@ -66,6 +67,8 @@ int main() {
     window.pop(m[i]);
     window.add(m[i + windowLen]);
   }
+
+  for (string s : perm) cout << s << endl;
 
   cout << perm.size();
 }
